@@ -21,12 +21,9 @@ void text_draw_character(unsigned int symbol, unsigned int x, unsigned int y, un
   symbol_index = symbol * FONT_0_HEIGHT;
   base_ptr = graph_get_xy_address(x, y);
 
-  print_number(symbol_index, 500, 550);
-
   for (i = 0; i < FONT_0_HEIGHT; i++)
   {
     temp = font0[symbol_index + i];
-    print_number(temp, 500, 570 + i * 20);
 
     for (j = 0; j < FONT_0_WIDTH; j++)
     {
@@ -38,6 +35,27 @@ void text_draw_character(unsigned int symbol, unsigned int x, unsigned int y, un
     }
 
     base_ptr += (graph_get_screen_width() - FONT_0_WIDTH);
+  }
+}
+
+void text_draw_string(char* string, unsigned int x, unsigned int y, unsigned int colour)
+{
+  unsigned int temp_x = x;
+  while (*string)
+  {
+    switch (*string)
+    {
+      case '\n':
+        y += FONT_0_HEIGHT;
+        break;
+      case '\r':
+        x = temp_x;
+        break;
+      default:
+        text_draw_character(*string, x, y, colour);
+        x += FONT_0_WIDTH;
+    }
+    string++;
   }
 }
 

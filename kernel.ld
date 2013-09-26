@@ -27,6 +27,11 @@ SECTIONS {
 	*/
 	.data : {*(.data)} > ram
 
+	/* 
+	* Next we put the rodata.
+	*/
+	.rodata : {*(.rodata)} > ram
+
 	/*
 	* Finally comes everything else. A fun trick here is to put all other 
 	* sections into this section, which will be discarded by default.

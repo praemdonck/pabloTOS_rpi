@@ -4,6 +4,7 @@
 #include "frame_buffer.h"
 #include "graphical.h"
 #include "text.h"
+#include <stdio.h>
 
 
 extern unsigned int* InitialiseFrameBuffer(unsigned int width, unsigned int height, unsigned int bit_depth);                
@@ -18,6 +19,7 @@ int main(void)
 {
   int* temp_ptr;
   int i;
+  char my_string[100];
 
   extern unsigned int font[];
   extern int frame_buffer_info;                      
@@ -72,7 +74,8 @@ int main(void)
   print_number((unsigned int)((void*)&frame_buffer_info + 0x40000000), 100, 340);
 
 
-  text_draw_character('P', 500, 500, 0xFFFFFFFF);
+  text_draw_string("Hello World\n\rI'm a very sad programmer", 500, 500, 0xFFFF00FF);
+  sprintf(my_string, "Hex Number: 0x%x", 1234432);
 
   //graph_draw_number((unsigned int)&my_num, 100, 390);
   //graph_draw_number(my_num, 100, 400);
